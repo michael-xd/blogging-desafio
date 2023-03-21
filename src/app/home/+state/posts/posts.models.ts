@@ -1,0 +1,27 @@
+export interface Post {
+  id: number;
+  timestamp: string;
+  author: Author;
+  title: string;
+  subtitle: string;
+  content: string;
+  comments: Comment[];
+  commentsTree: Comment[];
+}
+
+export interface Author {
+  id: number;
+  username: string;
+}
+
+export interface Comment {
+  id: number;
+  respondsTo: { id: number };
+  author: {
+    id: number;
+    username: string;
+  };
+  timestamp: string;
+  content: string;
+  replies?: Comment[];
+}

@@ -1,0 +1,70 @@
+<app-shared-nav-bar></app-shared-nav-bar>
+<main>
+  <header></header>
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <ng-container *ngIf="posts$ | async as posts">
+        <ng-container *ngIf="posts[0] as post">
+          <section class="post py-5">
+            <h1>{{ post.title }}</h1>
+            <p class="text-secondary post__subtitle">{{ post.subtitle }}</p>
+            <div class="row no-gutters mb-4" *ngIf="post.author as author">
+              <div class="col d-flex flex-row align-items-center">
+                <img class="avatar me-3" [src]="avatarSrcPath(author.id)" />
+                <div class="d-flex flex-column">
+                  <strong>{{ author.username }}</strong>
+                  <span class="text-secondary post__date">{{
+                    post.timestamp | date : "dd 'de' MMM, y"
+                  }}</span>
+                </div>
+              </div>
+            </div>
+            <div [innerHTML]="post.content" class="post__content"></div>
+          </section>
+          <h3>Comentários</h3>
+          <ng-container *ngFor="let comment of post.commentsTree">
+            <ng-template
+              [ngTemplateOutlet]="commentBlock"
+              [ngTemplateOutletContext]="{ comment: comment, postId: post.id }"
+            ></ng-template>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</main>
+
+<ng-template #commentBlock let-comment="comment" let-postId="postId">
+  <div class="container-fluid comment ms-4 my-4">
+    <div>
+      <button type="button" class="btn btn-link p-0">
+        {{ comment?.author?.username }} -
+        {{ comment?.timestamp | date : "dd MMM, y" }}
+      </button>
+    </div>
+    <div class="comment__content">
+      {{ comment?.content }}
+    </div>
+    <div class="mt-2 actions">
+      <button class="btn btn-link me-2">
+        <img src="/assets/images/icons/reply.svg" class="pb-1" />
+        Responder
+      </button>
+      <button class="btn btn-link mx-2">
+        <img src="/assets/images/icons/share.svg" class="pb-1" />
+        Compartilhar
+      </button>
+      <button class="btn btn-link ms-2">
+        <img src="/assets/images/icons/report.svg" class="pb-1" />
+        Reportar
+      </button>
+    </div>
+
+    <ng-container *ngFor="let reply of comment.replies">
+      <ng-template
+        [ngTemplateOutlet]="commentBlock"
+        [ngTemplateOutletContext]="{ comment: reply, postId }"
+      ></ng-template>
+    </ng-container>
+  </div>
+</ng-template>
