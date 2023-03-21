@@ -1,0 +1,73 @@
+<div class="modal-body">
+  <div class="container d-flex justify-content-end">
+    <button
+      type="button"
+      class="btn-close close pull-right"
+      aria-label="Close"
+      (click)="bsModalRef.hide()"
+    >
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <img class="avatar" [src]="avatarSrcPath(user?.id)" />
+    </div>
+    <div class="row text-center p-2">
+      <h4>{{ user?.username }}</h4>
+    </div>
+    <div class="row d-flex justify-content-center p-2">
+      <div class="col text-center">
+        <span class="text-secondary">Membro Desde</span>
+        <h3>{{ user?.memberSince | date : "dd/MM/y" }}</h3>
+      </div>
+      <div class="col text-center">
+        <span class="text-secondary">Amigos</span>
+        <h3>{{ user?.friendIds?.length }}</h3>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center p-2">
+      <div class="col text-center">
+        <span class="text-secondary">Posts</span>
+        <h3>{{ user?.posts?.length }}</h3>
+      </div>
+      <div class="col text-center">
+        <span class="text-secondary">Amigos Em Comum</span>
+        <h3>{{ commonFriends | json }}</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-body divider">
+  <div class="row p-2" *ngIf="user?.posts?.length">
+    <div class="col">
+      <span class="text-secondary">Últimos Posts</span>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item px-0" *ngFor="let post of user?.posts">
+          <button
+            type="button"
+            class="btn btn-link p-0"
+            (click)="post.isCollapsed = !post.isCollapsed"
+            [attr.aria-controls]="'collapse-' + post.id"
+          >
+            {{ post.title }}
+          </button>
+          <div
+            [id]="'collapse-' + post.id"
+            [collapse]="!post.isCollapsed"
+            [isAnimated]="true"
+            class="post"
+          >
+            <span class="text-secondary">{{ post.subtitle }}</span>
+            <div class="post__content" [innerHTML]="post.content"></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary">Adicionar amigo</button>
+  <button class="btn btn-primary">Enviar mensagem</button>
+  <button class="btn btn-danger">Reportar usuário</button>
+</div>

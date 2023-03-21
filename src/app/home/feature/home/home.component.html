@@ -37,7 +37,11 @@
 <ng-template #commentBlock let-comment="comment" let-postId="postId">
   <div class="container-fluid comment ms-4 my-4">
     <div>
-      <button type="button" class="btn btn-link p-0">
+      <button
+        type="button"
+        class="btn btn-link p-0"
+        (click)="userDetails(comment?.author?.id)"
+      >
         {{ comment?.author?.username }} -
         {{ comment?.timestamp | date : "dd MMM, y" }}
       </button>

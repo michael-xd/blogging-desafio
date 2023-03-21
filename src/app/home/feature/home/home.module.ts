@@ -8,6 +8,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { StorePostsModule } from '../../+state/posts/posts.module';
 import * as fromPost from '../../+state/posts/posts.reducer';
 import { PostsEffects } from '../../+state/posts/posts.effects';
+import { UserDetailsComponent } from '../../ui/user-details/user-details.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 @NgModule({
   imports: [
@@ -15,9 +18,11 @@ import { PostsEffects } from '../../+state/posts/posts.effects';
     StoreModule.forFeature(fromPost.POSTS_FEATURE_KEY, fromPost.reducer),
     EffectsModule.forFeature([PostsEffects]),
     StorePostsModule,
+    ModalModule.forRoot(),
+    CollapseModule.forRoot(),
     HomeRoutingModule,
     NavBarComponentModule,
   ],
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, UserDetailsComponent],
 })
 export class HomeComponentModule {}
