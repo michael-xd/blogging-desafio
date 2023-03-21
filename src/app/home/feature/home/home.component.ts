@@ -6,13 +6,14 @@ import {
 } from '@angular/core';
 import { Observable, Subject, take, takeUntil, zip } from 'rxjs';
 import { PostsFacade } from '../../+state/posts/posts.facade';
-import { Post } from '../../+state/posts/posts.models';
+import { Post, Comment } from '../../+state/posts/posts.models';
 import { avatarSrcPath } from '../../utils/helpers';
 import { User } from 'src/app/shared/+state/users/users.models';
 import { UsersFacade } from 'src/app/shared/+state/users/users.facade';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { UserDetailsComponent } from '../../ui/user-details/user-details.component';
 import { intersection } from 'lodash';
+import { CommentReplyComponent } from '../../ui/comment-reply/comment-reply.component';
 
 @Component({
   selector: 'app-home',
@@ -61,6 +62,34 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.bsModalRef = this.modalService.show(
           UserDetailsComponent,
           initialState
+        );
+      });
+  }
+
+  reply(comment: Comment, postId: number) {
+    const initialState: ModalOptions = {
+      initialState: { comment },
+      class: 'modal-dialog-centered',
+    };
+    this.bsModalRef = this.modalService.show(
+      CommentReplyComponent,
+      initialState
+    );
+
+    zip([
+      this.bsModalRef.content.output as Observable<{ data: string }>,
+      this.usersFacade.getUser(1),
+    ])
+      .pipe(take(1))
+      .subscribe(([reply, loggedInUser]) => {
+        this.postsFacade.replyComment(
+          postId,
+          comment.id,
+          {
+            id: loggedInUser?.id as number,
+            username: loggedInUser?.username as string,
+          },
+          reply.data
         );
       });
   }
