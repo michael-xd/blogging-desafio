@@ -3,7 +3,6 @@ import { POSTS_FEATURE_KEY, State, postsAdapter } from './posts.reducer';
 
 const { selectAll, selectEntities } = postsAdapter.getSelectors();
 
-// Lookup the 'Magazines' feature state managed by NgRx
 export const selectPostsState = createFeatureSelector<State>(POSTS_FEATURE_KEY);
 
 export const selectPostsLoaded = createSelector(

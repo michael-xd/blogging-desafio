@@ -32,6 +32,7 @@
       </div>
       <div class="col-9">
         <textarea
+          id="replyInput"
           class="textarea"
           placeholder="Sua resposta..."
           formControlName="reply"
@@ -40,7 +41,12 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button class="btn btn-primary" [disabled]="!form.valid" (click)="reply()">
+    <button
+      id="replyBtn"
+      class="btn btn-primary"
+      [disabled]="!form.valid"
+      (click)="reply()"
+    >
       Responder
     </button>
   </div>

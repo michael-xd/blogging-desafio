@@ -3,7 +3,6 @@ import { USERS_FEATURE_KEY, State, usersAdapter } from './users.reducer';
 
 const { selectAll, selectEntities } = usersAdapter.getSelectors();
 
-// Lookup the 'Magazines' feature state managed by NgRx
 export const selectUsersState = createFeatureSelector<State>(USERS_FEATURE_KEY);
 
 export const selectUsersLoaded = createSelector(

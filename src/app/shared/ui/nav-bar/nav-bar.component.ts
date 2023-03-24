@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-shared-nav-bar',
@@ -6,8 +6,6 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-bar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent {
   constructor() {}
-
-  ngOnInit(): void {}
 }

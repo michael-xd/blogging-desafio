@@ -6,7 +6,7 @@ export interface Post {
   subtitle: string;
   content: string;
   comments: Comment[];
-  commentsTree: Comment[];
+  commentsTree?: Comment[];
 }
 
 export interface Author {
@@ -16,7 +16,7 @@ export interface Author {
 
 export interface Comment {
   id: number;
-  respondsTo: { id: number };
+  respondsTo: { id: number } | null;
   author: {
     id: number;
     username: string;
