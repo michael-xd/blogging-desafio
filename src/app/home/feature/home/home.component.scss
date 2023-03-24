@@ -1,57 +1,11 @@
-$scroll-factor: 0.5;
-
-$background: #333;
-$header-height: 50px;
-$image: "/assets/images/home/header-image.jpg";
-
-// main {
-//   height: 150vh;
-//   max-height: 100%;
-//   overflow-x: hidden;
-//   perspective: 1px;
-//   perspective-origin: center top;
-//   transform-style: preserve-3d;
-// }
-
 header {
   height: 493px;
-  background: url($image);
+  background: url("/assets/images/home/header-image.jpg");
   background-size: cover;
   background-position: center center;
   position: relative;
-  // vertical-align: top;
   transform-origin: center top;
-  // transform: translateZ(-#{$scroll-factor * 2}px) scale(1 + $scroll-factor * 2);
 }
-
-// section {
-//   min-height: 200vh;
-//   background: white;
-//   transform: translateZ(0);
-//   padding: 10px 0;
-// }
-
-// h1 {
-//   font-size: 30px;
-//   font-weight: 400;
-//   padding: 10px 20px;
-// }
-
-// p {
-//   font-size: 18px;
-//   font-size: 300;
-//   padding: 0 20px;
-// }
-
-// a {
-//   text-decoration: none;
-//   color: dodgerblue;
-// }
-
-// html,
-// body {
-//   height: 100%;
-// }
 
 .post {
   .avatar {
